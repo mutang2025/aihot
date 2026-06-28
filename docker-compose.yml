@@ -1,0 +1,83 @@
+# AIHOT 每日 AI 热点新闻站
+# 主入口：Web http://<主机IP>:3080  /  API http://<主机IP>:8888/docs
+# 架构：复用现有 postgresql 容器（172.18.0.2）+ 1panel-network
+
+networks:
+  1panel-network:
+    external: true
+    name: 1panel-network
+
+volumes:
+  aihot-redis-data:
+  aihot-data:
+
+services:
+  # ============ Redis (队列 + 缓存) ============
+  redis:
+    image: redis:7-alpine
+    container_name: aihot-redis
+    restart: unless-stopped
+    networks:
+      - 1panel-network
+    volumes:
+      - aihot-redis-data:/data
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # ============ 后端 API + Workers ============
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: aihot-backend
+    restart: unless-stopped
+    networks:
+      - 1panel-network
+    depends_on:
+      redis:
+        condition: service_healthy
+    ports:
+      - "8888:8000"           # API 端口
+    environment:
+      DATABASE_URL: postgresql+asyncpg://lgc2025:lgc2025_pass_pg@postgresql:5432/aihot
+      REDIS_URL: redis://aihot-redis:6379/0
+      QWENPAW_BASE_URL: http://172.17.0.1:8088/v1
+      QWENPAW_API_KEY: not-needed
+      LITELLM_BASE_URL: http://litellm:4000/v1
+      LITELLM_API_KEY: not-needed
+      AGNES_API_KEY: ${AGNES_API_KEY}
+      AGNES_BASE_URL: https://apihub.agnes-ai.com/v1
+      AGNES_MODEL: agnes-2.0-flash
+      DEFAULT_MODEL: agnes-2.0-flash
+      ADMIN_USER: ${ADMIN_USER:-aihot}
+      ADMIN_PASS: ${ADMIN_PASS:-changeme}
+      TZ: Asia/Shanghai
+    volumes:
+      - aihot-data:/app/data   # 抓取缓存、embedding 缓存
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  # ============ 前端 Next.js ============
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: aihot-frontend
+    restart: unless-stopped
+    networks:
+      - 1panel-network
+    depends_on:
+      - backend
+    ports:
+      - "3080:3000"           # Web 端口
+    environment:
+      NEXT_PUBLIC_API_BASE: http://backend:8000
+      TZ: Asia/Shanghai

@@ -1,0 +1,220 @@
+# AIHOT 起步信源清单 (T1 官方一手 / T1.5 官方社媒 / T2 KOL+媒体)
+# 此文件是 seed data；正式运行时通过后台管理增删改
+
+sources:
+  # ===== T1: 官方博客/研究 (10) =====
+  - slug: openai-blog
+    name: OpenAI Blog
+    url: https://openai.com/blog
+    feed_url: https://openai.com/blog/rss.xml
+    tier: T1
+    category: model_release
+    scraper_type: rss
+  - slug: anthropic-blog
+    name: Anthropic Engineering
+    url: https://www.anthropic.com/engineering
+    feed_url: https://www.anthropic.com/engineering/rss.xml
+    tier: T1
+    category: research
+    scraper_type: rss
+  - slug: deepmind-blog
+    name: Google DeepMind Blog
+    url: https://deepmind.google/blog/
+    feed_url: https://deepmind.google/blog/rss.xml
+    tier: T1
+    category: research
+    scraper_type: rss
+  - slug: google-ai-blog
+    name: Google AI Blog
+    url: https://blog.google/technology/ai/
+    feed_url: https://blog.google/technology/ai/rss/
+    tier: T1
+    category: industry
+    scraper_type: rss
+  - slug: meta-ai-blog
+    name: Meta AI Blog
+    url: https://ai.meta.com/blog/
+    feed_url: https://ai.meta.com/blog/rss/
+    tier: T1
+    category: research
+    scraper_type: rss
+  - slug: huggingface-blog
+    name: Hugging Face Blog
+    url: https://huggingface.co/blog
+    feed_url: https://huggingface.co/blog/feed.xml
+    tier: T1
+    category: industry
+    scraper_type: rss
+  - slug: mit-news-ai
+    name: MIT News - AI
+    url: https://news.mit.edu/topic/mitartificial-intelligence2
+    feed_url: https://news.mit.edu/rss/topic/mitartificial-intelligence2
+    tier: T1
+    category: research
+    scraper_type: rss
+  - slug: arxiv-cs-ai
+    name: arXiv cs.AI
+    url: https://arxiv.org/list/cs.AI/recent
+    feed_url: https://rss.arxiv.org/rss/cs.AI
+    tier: T1
+    category: research
+    scraper_type: rss
+  - slug: arxiv-cs-lg
+    name: arXiv cs.LG
+    url: https://arxiv.org/list/cs.LG/recent
+    feed_url: https://rss.arxiv.org/rss/cs.LG
+    tier: T1
+    category: research
+    scraper_type: rss
+  - slug: openai-research
+    name: OpenAI Research
+    url: https://openai.com/research
+    feed_url: https://openai.com/research/index.xml
+    tier: T1
+    category: research
+    scraper_type: rss
+
+  # ===== T1.5: 官方社媒 (5) =====
+  # Twitter/X 抓取 v1.0 暂不接, 用 RSS 替代或留作 v1.1
+  - slug: mistral-blog
+    name: Mistral AI News
+    url: https://mistral.ai/news/
+    feed_url: https://mistral.ai/news/rss.xml
+    tier: T1.5
+    category: model_release
+    scraper_type: rss
+  - slug: xai-blog
+    name: xAI Blog
+    url: https://x.ai/blog
+    feed_url: https://x.ai/blog/rss.xml
+    tier: T1.5
+    category: model_release
+    scraper_type: rss
+  - slug: cohere-blog
+    name: Cohere Blog
+    url: https://cohere.com/blog
+    feed_url: https://cohere.com/blog/rss.xml
+    tier: T1.5
+    category: industry
+    scraper_type: rss
+  - slug: stability-blog
+    name: Stability AI News
+    url: https://stability.ai/news
+    feed_url: https://stability.ai/news/rss.xml
+    tier: T1.5
+    category: model_release
+    scraper_type: rss
+  - slug: perplexity-blog
+    name: Perplexity Blog
+    url: https://www.perplexity.ai/blog
+    feed_url: https://www.perplexity.ai/blog/rss.xml
+    tier: T1.5
+    category: product_release
+    scraper_type: rss
+
+  # ===== T2: KOL + 媒体 (15) =====
+  - slug: the-rundown-ai
+    name: The Rundown AI
+    url: https://www.therundown.ai/
+    feed_url: https://www.therundown.ai/feed
+    tier: T2
+    category: industry
+    scraper_type: rss
+  - slug: tldr-ai
+    name: TLDR AI
+    url: https://tldr.tech/ai
+    feed_url: https://tldr.tech/ai/rss
+    tier: T2
+    category: industry
+    scraper_type: rss
+  - slug: bens-bites
+    name: Ben's Bites
+    url: https://www.bensbites.com/
+    feed_url: https://www.bensbites.com/feed
+    tier: T2
+    category: product_release
+    scraper_type: rss
+  - slug: import-ai
+    name: Import AI
+    url: https://importai.substack.com/
+    feed_url: https://importai.substack.com/feed
+    tier: T2
+    category: industry
+    scraper_type: rss
+  - slug: machine-heart
+    name: 机器之心
+    url: https://www.jiqizhixin.com/
+    feed_url: https://www.jiqizhixin.com/rss
+    tier: T2
+    category: industry
+    scraper_type: rss
+  - slug: qbitai
+    name: 量子位
+    url: https://www.qbitai.com/
+    feed_url: https://www.qbitai.com/feed
+    tier: T2
+    category: industry
+    scraper_type: rss
+  - slug: paperweekly
+    name: PaperWeekly
+    url: https://paperweekly.cc/
+    feed_url: https://paperweekly.cc/feed
+    tier: T2
+    category: research
+    scraper_type: rss
+  - slug: hacker-news
+    name: Hacker News (AI tag)
+    url: https://hnrss.org/newest?q=AI+OR+LLM+OR+GPT+OR+Claude
+    feed_url: https://hnrss.org/newest?q=AI+OR+LLM+OR+GPT+OR+Claude
+    tier: T2
+    category: industry
+    scraper_type: rss
+  - slug: reddit-ml
+    name: Reddit r/MachineLearning
+    url: https://www.reddit.com/r/MachineLearning/
+    feed_url: https://www.reddit.com/r/MachineLearning/.rss
+    tier: T2
+    category: research
+    scraper_type: rss
+  - slug: techcrunch-ai
+    name: TechCrunch AI
+    url: https://techcrunch.com/category/artificial-intelligence/
+    feed_url: https://techcrunch.com/category/artificial-intelligence/feed/
+    tier: T2
+    category: industry
+    scraper_type: rss
+  - slug: venturebeat-ai
+    name: VentureBeat AI
+    url: https://venturebeat.com/ai/
+    feed_url: https://venturebeat.com/category/ai/feed/
+    tier: T2
+    category: industry
+    scraper_type: rss
+  - slug: the-decoder
+    name: The Decoder
+    url: https://the-decoder.com/
+    feed_url: https://the-decoder.com/feed/
+    tier: T2
+    category: industry
+    scraper_type: rss
+  - slug: marktechpost
+    name: MarkTechPost
+    url: https://www.marktechpost.com/
+    feed_url: https://www.marktechpost.com/feed/
+    tier: T2
+    category: research
+    scraper_type: rss
+  - slug: v2ex-ai
+    name: V2EX AI 节点
+    url: https://www.v2ex.com/?tab=ai
+    feed_url: https://www.v2ex.com/feed/tab/ai.xml
+    tier: T2
+    category: tips_opinions
+    scraper_type: rss
+  - slug: mit-techreview-ai
+    name: MIT Technology Review AI
+    url: https://www.technologyreview.com/topic/artificial-intelligence/
+    feed_url: https://www.technologyreview.com/topic/artificial-intelligence/feed
+    tier: T2
+    category: industry
+    scraper_type: rss
